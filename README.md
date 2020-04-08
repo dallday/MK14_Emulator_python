@@ -1,6 +1,8 @@
 # MK14_Emulator_python
 A MK14 emulator written in Python thanks to Rob Dobson
 
+***************  code to follow shortly - seems I have not quite got it right *****************
+
 This emulator is based on Rob's MK14PyEm project
 https://github.com/robdobsn/MK14PyEm
 
