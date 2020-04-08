@@ -19,6 +19,15 @@ To run use
         to run the MK14 duckshoot
  python3 MK14.py
         to run the MK14 monitor program - GO does not seem to work correctly.
-        
+
+ The various files
+ 	MK14.py          runs the MK14 monitor program
+	MK14_V2.py 	 runs a different version of the MK14 monitor program
+	MK14DuckShoot.py runs the Duck shoot from the MK14 manual without the monitor rom
+	ins8060cpu.py 	 provides the emulate the SC/MP propcessor
+	mk14memmap.py 	 provides the emulation of the Memory Map for the MK14
+	mk14ui.py 	 handles the 7 segment display and the keyboard.
+
+
 
 Thanks to Rob for the original idea.
