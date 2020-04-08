@@ -16,8 +16,11 @@ Hopefully the comments in the code will help you follow how it works.
 
 To run use 
  python3 MK14DuckShoot.py
+ 
         to run the MK14 duckshoot
+ 
  python3 MK14.py
+ 
         to run the MK14 monitor program - GO does not seem to work correctly.
 
  The various files
