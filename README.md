@@ -15,17 +15,12 @@ ToDo :- to handle the keys in the same way as the original MK14 does.
 
 Hopefully the comments in the code will help you follow how it works.
 
-To run use 
- python3 MK14DuckShoot.py
+To run use "python3 MK14DuckShoot.py"  to run the MK14 duckshoot
  
-        to run the MK14 duckshoot
- 
- python3 MK14.py
- 
-        to run the MK14 monitor program - 
-	select 0f12 and press Go to run duck shoot
+ "python3 MK14.py" to run the MK14 monitor program - select 0f12 and press Go to run duck shoot
 
  The various files
+ 
  	MK14.py          runs the MK14 monitor program
 	MK14_V2.py 	 runs a different version of the MK14 monitor program
 	MK14DuckShoot.py runs the Duck shoot from the MK14 manual without the monitor rom
