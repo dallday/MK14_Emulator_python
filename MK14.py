@@ -1,9 +1,10 @@
 
 # This is an emulator for MK14 using python
 # This loads the monitor rom into Rom space 
-# plus loads the "Duck shoot" code into memory
+# plus can load a hex file by specify it as the parameter
+
 #
-# It was taken from one provided on github
+# The code was taken from one provided on github
 #  https://github.com/robdobsn/MK14PyEm
 #
 #  first fix was to change start address to x000 
@@ -11,14 +12,23 @@
 #   
 #  The code now multiplexes the 7 segment display like the real MK14 does 
 #
-# David Allday Feb 2020
+# David Allday Mar 2020
 #
+
+#  memVals  - defines the contents to write to memory
+#            each entry has an address element
+#                 followed by a data element 
+#                       which is a number of bytes
+#           Note: During intial setup (mem.init) the ROM can be written to.
+#      
+#                 
 
 
 import mk14ui          # mk14 user interface 
 import ins8060cpu      # emulates the scmp processor
+import sys             # system functions
 
-# The mk14 monitor rom - version ???
+# The mk14 monitor rom - version 2 probably ???
 
 romCode = (0x0000, [
 0,207,255,144,30,55,194,12,51,199,255,192,242,1,192,235,49,192,231,53,192,
@@ -67,12 +77,15 @@ def hexVal(inStr, pos, len):
     """
     return int(inStr[pos:pos + len], 16)
 
-def fromHexLines(hexLines):
+def fromHexLines(hexLinesp):
     """ 
         Convert the hexlines format into the mem format used to load memory
     """
+    print ("hexLinesp")
+    print (hexLinesp)
     memOut = []
-    for hexLine in hexLines:
+    for hexLine in hexLinesp:
+        print ("hexline", hexLine)
         leng = hexVal(hexLine, 1, 2)
         if leng > 0:
             addr = hexVal(hexLine, 3, 4)
@@ -100,12 +113,43 @@ def showMem(mem, addr, leng):
             print()
     print()
 
+
 # this is the "Duck Shoot" in hex format
+
 hexLines = [
     ":180F1200C40D35C40031C401C8F4C410C8F1C400C8EEC40801C0E71EB2",
     ":180F2A00C8E49404C4619002C400C9808F01C0D89C0EC180E4FF980811",
     ":160F4200C8CEC0CAE480C8C64003FC0194D6B8BF98C8C40790CEDD"
 ]
+
+
+print ('Number of arguments:', len(sys.argv), 'arguments.')
+print ('Argument List:', str(sys.argv))
+
+if __name__ == "__main__":
+    print("Arguments count: " , len(sys.argv))
+    for i, arg in enumerate(sys.argv):
+        print("Argument ", i, "='", {arg}, "'")
+
+
+
+if (len(sys.argv) > 1):
+    filein = sys.argv[1]
+    with open(filein) as fp:
+        # readlines reads all the lines of a file into a list 
+        # which we can them process line by line
+        hexLines=fp.readlines()
+        print ("Read ",filein)
+        # read would load all the lines of the file as characters ??
+        # reading the file does not create the array needed as the code loaded above does
+        # only a character stream 
+
+
+print ("hexLines")
+print (hexLines)
+
+
+
 # convert it into the mem format used
 memVals = fromHexLines(hexLines)
 # add it to the Rom code

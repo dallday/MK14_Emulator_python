@@ -65,7 +65,7 @@ class MK14_UI:
             Create window
              setup 7seg digits
              setup buttons
-             needs memoryMap to handle dispaly and keyboard
+             needs memoryMap to handle display and keyboard
         """
         self.tkRoot = tk.Tk()
         self.tkRoot.title("MK14")

@@ -110,7 +110,6 @@ class MK14_MEMMAP:
         elif page==0xb00:
             # DA March 2020 added extended 
             #   B00-BFF  256 bytes RAM (Extended) DA March 2020 added extended ram
-            # self.stdRam[addr - 0xf00] = val & 0xff
             self.extRam[addr & 0xff] = val & 0xff
 
         elif page == 0x900 or page == 0xd00:
