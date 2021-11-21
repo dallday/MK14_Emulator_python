@@ -14,14 +14,13 @@
 #
 # David Allday Mar 2020
 #
-
 #  memVals  - defines the contents to write to memory
 #            each entry has an address element
 #                 followed by a data element 
 #                       which is a number of bytes
 #           Note: During intial setup (mem.init) the ROM can be written to.
 #      
-#                 
+#  David Allday Nov 2021                 
 
 
 import mk14ui          # mk14 user interface 
@@ -59,11 +58,6 @@ romCode = (0x0000, [
 202,10,144,175,196,0,55,196,75,51,63])
 
 
-
-
-
-
-
 def hexVal(inStr, pos, len):
     """ Returns the  byte at position + len as a hex value
            Args:
@@ -81,11 +75,11 @@ def fromHexLines(hexLinesp):
     """ 
         Convert the hexlines format into the mem format used to load memory
     """
-    print ("hexLinesp")
-    print (hexLinesp)
+    #print ("hexLinesp")
+    #print (hexLinesp)
     memOut = []
     for hexLine in hexLinesp:
-        print ("hexline", hexLine)
+        # print ("hexline", hexLine)
         leng = hexVal(hexLine, 1, 2)
         if leng > 0:
             addr = hexVal(hexLine, 3, 4)
@@ -126,10 +120,10 @@ hexLines = [
 print ('Number of arguments:', len(sys.argv), 'arguments.')
 print ('Argument List:', str(sys.argv))
 
-if __name__ == "__main__":
-    print("Arguments count: " , len(sys.argv))
-    for i, arg in enumerate(sys.argv):
-        print("Argument ", i, "='", {arg}, "'")
+#if __name__ == "__main__":
+#    print("Arguments count: " , len(sys.argv))
+#    for i, arg in enumerate(sys.argv):
+#       print("Argument ", i, "='", {arg}, "'")
 
 
 
@@ -145,8 +139,8 @@ if (len(sys.argv) > 1):
         # only a character stream 
 
 
-print ("hexLines")
-print (hexLines)
+#print ("hexLines")
+#print (hexLines)
 
 
 

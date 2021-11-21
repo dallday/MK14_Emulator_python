@@ -10,10 +10,19 @@
 #
 # David Allday Feb 2020
 #
+#  memVals  - defines the contents to write to memory
+#            each entry has an address element
+#                 followed by a data element 
+#                       which is a number of bytes
+#           Note: During intial setup (mem.init) the ROM can be written to.
+#      
+#  David Allday Nov 2021                 
+
 
 
 import mk14ui          # mk14 user interface 
 import ins8060cpu      # emulates the scmp processor
+import sys             # system functions
 
 # The mk14 monitor rom - version 2
 
@@ -95,12 +104,15 @@ def hexVal(inStr, pos, len):
     """
     return int(inStr[pos:pos + len], 16)
 
-def fromHexLines(hexLines):
+def fromHexLines(hexLinesp):
     """ 
         Convert the hexlines format into the mem format used to load memory
     """
+    #print ("hexLinesp")
+    #print (hexLinesp)
     memOut = []
-    for hexLine in hexLines:
+    for hexLine in hexLinesp:
+        # print ("hexline", hexLine)
         leng = hexVal(hexLine, 1, 2)
         if leng > 0:
             addr = hexVal(hexLine, 3, 4)
@@ -128,12 +140,27 @@ def showMem(mem, addr, leng):
             print()
     print()
 
-# thes is the "Duck Shoot" in hex format
+# this is the "Duck Shoot" in hex format
 hexLines = [
     ":180F1200C40D35C40031C401C8F4C410C8F1C400C8EEC40801C0E71EB2",
     ":180F2A00C8E49404C4619002C400C9808F01C0D89C0EC180E4FF980811",
     ":160F4200C8CEC0CAE480C8C64003FC0194D6B8BF98C8C40790CEDD"
 ]
+
+print ('Number of arguments:', len(sys.argv), 'arguments.')
+print ('Argument List:', str(sys.argv))
+
+if (len(sys.argv) > 1):
+    filein = sys.argv[1]
+    with open(filein) as fp:
+        # readlines reads all the lines of a file into a list 
+        # which we can them process line by line
+        hexLines=fp.readlines()
+        print ("Read ",filein)
+        # read would load all the lines of the file as characters ??
+        # reading the file does not create the array needed as the code loaded above does
+        # only a character stream 
+
 # convert it into the mem format used
 memVals = fromHexLines(hexLines)
 # add it to the Rom code
@@ -141,6 +168,7 @@ memVals.append(romCode)
 
 # initialise the CPU
 #  loads the memory and set the program counter
+# and does a debug trace
 cpu = ins8060cpu.CPU_INS8060(memVals, 0x000, True, {"base":0xf0f,"count":3})
 
 # debug to show rom space
