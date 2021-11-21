@@ -32,8 +32,8 @@ Use "python3 MK14DuckShoot.py"  to load and run the MK14 duckshoot. The monitor 
 
  The various files
  
- 	MK14.py          runs the MK14 monitor program.
-	MK14_V2.py 	 runs a different version of the MK14 monitor program.
+ 	MK14.py          runs the MK14 monitor program, if no hex file specified loads Duckshoot.
+	MK14_V2.py 	 runs in debug mode with (maybe ?) a different version of the MK14 monitor program.
 	MK14DuckShoot.py Loads and starts the Duck shoot from the MK14 manual. 
 	ins8060cpu.py 	 provides the emulate the SC/MP propcessor.
 	mk14memmap.py 	 provides the emulation of the Memory Map for the MK14.
