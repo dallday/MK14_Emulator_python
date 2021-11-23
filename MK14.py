@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # This is an emulator for MK14 using python
 # This loads the monitor rom into Rom space 
 # plus can load a hex file by specify it as the parameter
@@ -26,6 +26,8 @@
 import mk14ui          # mk14 user interface 
 import ins8060cpu      # emulates the scmp processor
 import sys             # system functions
+
+
 
 # The mk14 monitor rom - version 2 probably ???
 
@@ -71,21 +73,22 @@ def hexVal(inStr, pos, len):
     """
     return int(inStr[pos:pos + len], 16)
 
-def fromHexLines(hexLinesp):
+def fromHexLines(hexLines):
     """ 
         Convert the hexlines format into the mem format used to load memory
     """
     #print ("hexLinesp")
     #print (hexLinesp)
     memOut = []
-    for hexLine in hexLinesp:
-        # print ("hexline", hexLine)
+    for hexLine in hexLines:
+        #print ("hexline", hexLine)
         leng = hexVal(hexLine, 1, 2)
         if leng > 0:
             addr = hexVal(hexLine, 3, 4)
             memVals = []
             for i in range(leng):
                 memVals.append(hexVal(hexLine, 9 + i * 2, 2))
+                #print("hex:",(hexLine, 9 + i * 2, 2))
             memOut.append([addr, memVals])
     return memOut
 
@@ -109,6 +112,9 @@ def showMem(mem, addr, leng):
 
 
 # this is the "Duck Shoot" in hex format
+# it will be loaded if no hex file is specified
+# to run it execute at F12 
+# enter F12 and press the Go button
 
 hexLines = [
     ":180F1200C40D35C40031C401C8F4C410C8F1C400C8EEC40801C0E71EB2",
@@ -120,10 +126,10 @@ hexLines = [
 print ('Number of arguments:', len(sys.argv), 'arguments.')
 print ('Argument List:', str(sys.argv))
 
-#if __name__ == "__main__":
-#    print("Arguments count: " , len(sys.argv))
-#    for i, arg in enumerate(sys.argv):
-#       print("Argument ", i, "='", {arg}, "'")
+if __name__ == "__main__":
+    print("Arguments count: " , len(sys.argv))
+    for i, arg in enumerate(sys.argv):
+       print("Argument ", i, "='", {arg}, "'")
 
 
 
@@ -139,8 +145,8 @@ if (len(sys.argv) > 1):
         # only a character stream 
 
 
-#print ("hexLines")
-#print (hexLines)
+# print ("hexLines")
+# print (hexLines)
 
 
 

@@ -1,4 +1,25 @@
-
+#!/usr/bin/python3
+# part of the MK14 emulator in python
+# it handles the memory mapping
+# 
+# The init function takes a list containing address and memory blocks
+# The address block gives the address of the first byte and the memory block contains bytes to be loaded.
+# Note:- during the init phase the ROM protection is disabled.
+#
+# getDisplaySegments - returns the status of a display byte 
+#
+# doButtonMap - sets/unsets the bit in the address space for buttons.
+#
+# read - reads a byte from memory
+#        should also handle keyboard 
+#        and IO chip stuff. TODO
+#
+# write - writes a byte to memory 
+#         handle the updating of display 
+#        and IO chip stuff. TODO
+#         
+#        
+#
 
 class MK14_MEMMAP:
 
@@ -35,13 +56,13 @@ class MK14_MEMMAP:
         """
             sets bit stuff based on button pressed outside in mk14ui 
         """
-        if buttonStr == "ABT":
+        if buttonStr == "Abort":
             self.doButtonMap(4, 5, isPressed)
-        elif buttonStr == "TRM":
+        elif buttonStr == "Term":
             self.doButtonMap(7, 5, isPressed)
-        elif buttonStr == "MEM":
+        elif buttonStr == "Mem":
             self.doButtonMap(3, 5, isPressed)
-        elif buttonStr == "GO":
+        elif buttonStr == "Go":
             self.doButtonMap(2, 5, isPressed)
         else:
             buttonCode = int(buttonStr, 16)

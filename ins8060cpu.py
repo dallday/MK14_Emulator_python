@@ -20,6 +20,11 @@
 #        At present just do the one instruction. 
 #
 # David Allday Feb 2020
+#
+#  fix - 
+#        an indexed or relative jump instruction
+#        it does not use the ext register if #80
+#        DA feb 2020
 # 
 
 # use the MK14 version of the memory mapping
